@@ -9,7 +9,11 @@ Since this may appear a little bit confusing, consider the following example:
     
     value1+value2, value1-value2
 
-is logically illegal. But the compiler does not know about is aspect, and thus cannot be of any help. On the other hand, watt and seconds can be multiplied and divided. I assumed that it would be useful to define which operations allowed, and thus get all others out of potential reach. In the end, if built up some framework-like code that allows to easily define those restrictions. As a result, considering the example mentioned above, a compiler is now able to detect that
+is logically illegal, while
+
+    value1*value2, value1/value2
+
+is legal. But - the compiler does not know about is aspect, and thus cannot be of any help, like checking if the developer failed on the logical restrictions. I assumed that it would be useful to define which operations are allowed, and thus get all others out of potential reach. In the end, I've built up some framework-like code that allows to easily define those restrictions. As a result, considering the example mentioned above, a compiler is now able to detect that
 
     value1+value2
 
@@ -26,4 +30,5 @@ Feel free to check out my code, have a look at it, comment or give suggestions -
 There are a few things you should note before playing around with this code:
 * The code requires a rather new compiler (especially supporting decltype() and std::initializer_list). I've tested it with GCC 4.7.1 on Windows and GCC 4.6.3 on Ubuntu.
 * Code-documentation is not completed yet, and may still leave some questions. I will add it when I've enough time for it, feel free to ask if some things occur too strange to be understable.
+* The compiler errors that may arise once a check fails are quite hard to read. It's template stuff :)
 
