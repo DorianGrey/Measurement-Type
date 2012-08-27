@@ -33,9 +33,9 @@ struct SelectValid
 // Allowed operators for division
 //
 template<typename T1, typename T2>
-auto operator/(const Measurement::Value<T1, Measurement::Unit::WATT>& v1, const Measurement::Value<T2, Measurement::Unit::SEC>& v2) -> Measurement::Value<decltype(v1.val/v2.val), Measurement::Unit::WpS>
+auto operator/(const Measurement::Value<T1, Measurement::Unit::WATT>& v1, const Measurement::Value<T2, Measurement::Unit::SEC>& v2) -> Measurement::Value<decltype(v1.Get()/v2.Get()), Measurement::Unit::WpS>
 {
-    return Measurement::Value<decltype(v1.val/v2.val), Measurement::Unit::WpS>{ v1.val/v2.val };
+    return Measurement::Value<decltype(v1.Get()/v2.Get()), Measurement::Unit::WpS>{ v1.Get()/v2.Get() };
 }
 
 // Allowed operators for multiplication
@@ -44,14 +44,14 @@ auto operator/(const Measurement::Value<T1, Measurement::Unit::WATT>& v1, const 
  * For WATT*SEC
  */
 template<typename T1, typename T2>
-auto operator*(const Measurement::Value<T1, Measurement::Unit::WATT>& v1, const Measurement::Value<T2, Measurement::Unit::SEC>& v2) -> Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::WS>
+auto operator*(const Measurement::Value<T1, Measurement::Unit::WATT>& v1, const Measurement::Value<T2, Measurement::Unit::SEC>& v2) -> Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::WS>
 {
-    return Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::WS>{ v1.val*v2.val };
+    return Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::WS>{ v1.Get()*v2.Get() };
 }
 template<typename T1, typename T2>
-auto operator*(const Measurement::Value<T1, Measurement::Unit::SEC>& v1, const Measurement::Value<T2, Measurement::Unit::WATT>& v2) -> Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::WS>
+auto operator*(const Measurement::Value<T1, Measurement::Unit::SEC>& v1, const Measurement::Value<T2, Measurement::Unit::WATT>& v2) -> Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::WS>
 {
-    return Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::WS>{ v1.val*v2.val };
+    return Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::WS>{ v1.Get()*v2.Get() };
 }
 
 /**
@@ -59,8 +59,8 @@ auto operator*(const Measurement::Value<T1, Measurement::Unit::SEC>& v1, const M
  *
  */
 template<typename T1, typename T2>
-auto operator/(const Measurement::Value<T1, Measurement::Unit::WS>& v1, const Measurement::Value<T2, Measurement::Unit::WpS>& v2) -> Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::Square_SEC>
+auto operator/(const Measurement::Value<T1, Measurement::Unit::WS>& v1, const Measurement::Value<T2, Measurement::Unit::WpS>& v2) -> Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::Square_SEC>
 {
-    return Measurement::Value<decltype(v1.val* v2.val), Measurement::Unit::Square_SEC>{ v1.val*v2.val };
+    return Measurement::Value<decltype(v1.Get()* v2.Get()), Measurement::Unit::Square_SEC>{ v1.Get()*v2.Get() };
 }
 #endif /* OPERATIONS_HPP_ */

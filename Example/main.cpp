@@ -7,6 +7,8 @@
 
 #include "MeasurementValues/Operations.hpp"
 #include <iostream>
+#include <string>
+#include <sstream>
 
 int main(int /*argc*/, char** /*argv*/)
 {
@@ -17,24 +19,30 @@ int main(int /*argc*/, char** /*argv*/)
     Measurement::Value<float, Measurement::Unit::Square_SEC> val6 = val4 / val3;   /**< Assignment operator */
     Measurement::Value<double, Measurement::Unit::Square_SEC> val5 = val6;         /**< Assignment operator with internal conversion float->double*/
 
+    /// Testing istream support.
+    std::stringstream blabbel;
+    blabbel << "54.3f";
+    blabbel >> val2;
+
     /// Testing integral scaling.
     std::cout << "<Test1::Begin> Testing integral scaling..." << std::endl;
     Measurement::Value<float, Measurement::Unit::SEC> val7{ 12.34f };
     val7 = val2*3;
-    std::cout << val7.val << std::endl;
+
+    std::cout << val7 << std::endl;
     val7 *= 4;
-    std::cout << val7.val << std::endl;
+    std::cout << val7 << std::endl;
     val7 = val2/4;
-    std::cout << val7.val << std::endl;
+    std::cout << val7 << std::endl;
     val7 /= 3;
-    std::cout << val7.val << std::endl;
+    std::cout << val7 << std::endl;
     std::cout << "<Test1::End> Testing integral scaling finished..." << std::endl;
 
-    std::cout << val1.val << std::endl;
-    std::cout << val3.val << std::endl;
-    std::cout << val4.val << std::endl;
-    std::cout << val5.val << std::endl;
-    std::cout << val6.val << std::endl;
+    std::cout << val1 << std::endl;
+    std::cout << val3 << std::endl;
+    std::cout << val4 << std::endl;
+    std::cout << val5 << std::endl;
+    std::cout << val6 << std::endl;
 
     return 0;
 }
