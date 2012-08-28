@@ -43,6 +43,8 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << val4 << std::endl;
     std::cout << val5 << std::endl;
     std::cout << val6 << std::endl;
+    std::cout << val5+val6 << std::endl;
+    std::cout << val5-val6 << std::endl;
 
     return 0;
 }

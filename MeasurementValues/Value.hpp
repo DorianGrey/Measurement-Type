@@ -41,6 +41,11 @@ namespace Measurement
             Value(const Value< S, unit >& other) : val(static_cast<T>(other.Get()))
             {}
 
+            T Get() const
+            {
+                return this->val;
+            }
+
             // Assingment operator - we accept any compatible type, i.e. there should be a valid conversion.
             template<typename S>
             Value& operator=(const Value< S, unit >& other)
@@ -71,11 +76,35 @@ namespace Measurement
                 this->val /= other;
             }
 
-            T Get() const
+            // Additions are ok, as long as the unit is the same are the numeric values are compatible.
+            // Note that S may be larger or smaller than T, we're automatically deducing the resulting type.
+            template<typename S>
+            auto operator+(const Value<S, unit>& other) -> Value<decltype(this->Get()+other.Get()), unit>
             {
-                return this->val;
+                return Value<decltype(this->Get()+other.Get()), unit> {this->Get() + other.Get()};
             }
 
+            // Note: For internal value change, we need to ensure that S can be casted to T.
+            template<typename S>
+            void operator+=(const Value<S, unit>& other)
+            {
+                this->val += static_cast<T>(other.Get());
+            }
+
+            // Subtracts are ok, as long as the unit is the same are the numeric values are compatible.
+            // Note that S may be larger or smaller than T, we're automatically deducing the resulting type.
+            template<typename S>
+            auto operator-(const Value<S, unit>& other) -> Value<decltype(this->Get()-other.Get()), unit>
+            {
+                return Value<decltype(this->Get()-other.Get()), unit> {this->Get() - other.Get()};
+            }
+
+            // Note: For internal value change, we need to ensure that S can be casted to T.
+            template<typename S>
+            void operator-=(const Value<S, unit>& other)
+            {
+                this->val -= static_cast<T>(other.Get());
+            }
 
             /** \brief Friend function for native ostream support. Note that, for the moment (!),
              *         this function only puts the value to the stream. Maybe I will change this
